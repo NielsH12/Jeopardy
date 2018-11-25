@@ -18,10 +18,14 @@ class Quiz{
   }
   
   void click(PVector click, boolean left){
-    if(click.x > pos.x && click.x < pos.x + size.x && click.y > pos.y && click.y < pos.y + size.y){
-      int t = (int)Math.floor(click.x / (size.x / categories.size()));
+    // Check that click was within Quiz window
+    if(click.x > pos.x && click.x < pos.x + size.x && click.y > pos.y && click.y < pos.y + size.y){ 
       
-      currentlyPlaying = categories.get(t).click((int)click.y, left);
+      // Find which category was clicked
+      int t = (int)Math.floor(click.x / (size.x / categories.size())); 
+      
+      // Call click function on clicked category
+      currentlyPlaying = categories.get(t).click((int)click.y, left); 
     }
   }
   
