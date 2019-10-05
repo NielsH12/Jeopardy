@@ -44,10 +44,10 @@ class Category{
   
   // Public functions
   
-  Button click(int y, boolean left){
-    int t = (int)Math.floor(y / (size.y / buttons.size()));
+  Button click(){
+    int t = (int)Math.floor(int(mouseY) / (size.y / buttons.size()));
     
-    buttons.get(t).click(left);
+    buttons.get(t).click();
     return buttons.get(t);
   }
   

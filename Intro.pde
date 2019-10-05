@@ -18,18 +18,18 @@ class Intro{
     
     fill(color(255, 255, 0, map(introCounter, introCounterBackup, 120, 0, 255)));
     textSize(72);
-    textAlign(CENTER);
+    //textAlign(CENTER);
     text("Music Jeopardy", width/2, height/2 - 25);
     
     fill(color(255, 255, 0, map(introCounter, introCounterBackup - 10, 10, 0, 255)));
     textSize(18);
-    textAlign(CENTER);
+    //textAlign(CENTER);
     text("By Niels Hvid", width/2, height/2 + 25);
     
     if (credit){
       fill(color(255, 255, 0, map(introCounter, introCounterBackup - 60, 60, 0, 255)));
       textSize(36);
-      textAlign(CENTER);
+      //textAlign(CENTER);
       text("Music by " + author[0], width/2, height/2 + 125);
     }
     
@@ -44,9 +44,9 @@ class Intro{
   
 
   
-  void click(PVector click, boolean left){
+  void click(){
     if (state == 0){
-      if (!left){
+      if (mouseButton == RIGHT){
         introCounter = 0;
       }
     }

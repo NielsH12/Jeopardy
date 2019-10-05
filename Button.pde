@@ -28,7 +28,6 @@ class Button{
     stroke(0);
     strokeWeight(15);
     rect(pos.x, pos.y, size.x, size.y);
-    
     // Text
     if (title){
       textFont(createFont("Arial Bold", 46));
@@ -38,7 +37,6 @@ class Button{
     
     fill(color(255,255,0));
     textSize(46);
-    textAlign(CENTER);
     
     if (title){
       text(value, pos.x + size.x / 2, pos.y + size.y / 2);
@@ -48,12 +46,12 @@ class Button{
     }
   }
   
-  void click(boolean left){
+  void click(){
     if (title) return;
     
     switch (state) {
       case 0:  // Button is passive
-        if (left){
+        if (mouseButton==LEFT){
           player.pause();
           player = minim.loadFile(song,2048);
           player.play();
@@ -67,7 +65,7 @@ class Button{
         break;
       
       case 1: // Button is playing
-        if (left){
+        if (mouseButton==LEFT){
           player.pause();
           c = c2;
           state = 2;
@@ -79,7 +77,7 @@ class Button{
         break;
           
       case 2: // Button is waiting
-        if (left){
+        if (mouseButton==LEFT){
           player = minim.loadFile(answer, 2048);
           player.play();
           c = c3;
@@ -92,7 +90,7 @@ class Button{
         break;
       
       case 3: // Button is playing answer
-        if (left) {
+        if (mouseButton==LEFT) {
           player.pause();
           value = " ";
           c = c4;
@@ -106,7 +104,7 @@ class Button{
         break;
         
       case 4: // Button is dead
-        if (left) {
+        if (mouseButton==LEFT) {
           player.pause();
         } else {
           value = backupValue;

@@ -9,7 +9,6 @@ class Error{
     fill(color(255,255,255));
     textSize(36);
     
-    textAlign(CENTER);
     text(error, width/2, height/2);
   }
   

@@ -16,7 +16,6 @@ Winner winner;
 
 Error error;
 
-
 /*
   STATES:
   0: Intro
@@ -25,12 +24,14 @@ Error error;
   3: Winning screen
   4: Error screen
 */
+
 int state; 
 
 void setup(){
   fullScreen();
-  //size(1920,1080);
   frameRate(30);
+  
+  textAlign(CENTER, CENTER);
   
   surface.setTitle("Music Jeopardy");
   
@@ -38,16 +39,14 @@ void setup(){
 
   minim = new Minim(this);
   File introSong = new File(sketchPath() + "/data/DefaultMusic/intro_song.mp3");
-  if (!introSong.exists()) {
-    error.setError("Intro song not found");
-  } else {
+  if (introSong.exists()) {
     player = minim.loadFile(sketchPath() + "/data/DefaultMusic/intro_song.mp3", 2048);
     player.play();
   }
   
   TC = new TeamController();
   
-  intro = new Intro(5); // 5 second intro screen
+  intro = new Intro(5);
   teamSelect = new TeamSelect();
   quiz = new Quiz(new PVector(0,0), new PVector(width, height / 7 * 6));
   winner = new Winner();
@@ -61,8 +60,6 @@ void setup(){
 
 void draw(){
   background(0);
-  
-  println(state);
   
   switch(state){
     case 0:
@@ -96,21 +93,17 @@ void mousePressed(){
   switch(state){
     
     case 0:
-      intro.click(new PVector(mouseX, mouseY), mouseButton == LEFT);
+      intro.click();
       break;
       
     case 1:
-      teamSelect.click(new PVector(mouseX, mouseY), mouseButton == LEFT);    
+      teamSelect.click();    
       break;
       
     case 2:
       quiz.click(new PVector(mouseX, mouseY), mouseButton == LEFT);
       TC.click(new PVector(mouseX, mouseY), mouseButton == LEFT);
       
-      break;
-      
-    case 3:
-    
       break;
       
     default:
@@ -127,7 +120,7 @@ void mouseReleased(){
       break;
       
     case 1:
-      teamSelect.release(new PVector(mouseX, mouseY), mouseButton == LEFT);    
+      teamSelect.mouseReleased();
       break;
       
     case 2:
@@ -152,11 +145,11 @@ void keyPressed(){
       break;
       
     case 1:
-      teamSelect.keyPress(key);
+      teamSelect.keyPressed();
       break;
       
     case 2:
-      quiz.keyPress(key);
+      quiz.keyPressed();
       break;
       
     case 3:

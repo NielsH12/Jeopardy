@@ -28,7 +28,7 @@ class Winner{
   
     textSize(map(winningCounter, 0, 10000, 72, 1000));
     fill(color(abs(r),abs(g),abs(b)));
-    textAlign(CENTER);
+    //textAlign(CENTER);
     text(teamName, width/2, height/2);
     
     winningCounter++;

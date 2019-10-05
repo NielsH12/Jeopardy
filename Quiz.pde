@@ -17,15 +17,22 @@ class Quiz{
     }
   }
   
+  void keyPressed(){
+    if (key == 'q'){
+      TC.findWinningTeam();
+      state = 3;
+    }
+  }
+  
   void click(PVector click, boolean left){
     // Check that click was within Quiz window
-    if(click.x > pos.x && click.x < pos.x + size.x && click.y > pos.y && click.y < pos.y + size.y){ 
+    if(mouseX > pos.x && mouseX < pos.x + size.x && mouseY > pos.y && mouseY < pos.y + size.y){ 
       
       // Find which category was clicked
-      int t = (int)Math.floor(click.x / (size.x / categories.size())); 
+      int t = (int)Math.floor(mouseX / (size.x / categories.size())); 
       
       // Call click function on clicked category
-      currentlyPlaying = categories.get(t).click((int)click.y, left); 
+      currentlyPlaying = categories.get(t).click(); 
     }
   }
   

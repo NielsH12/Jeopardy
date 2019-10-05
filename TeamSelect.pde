@@ -2,8 +2,6 @@ class TeamSelect{
   TeamSelect(){
     sliderY = height/10 * 4;
     sliderHeight = height/5;
-    
-    
   }
   
   void draw(){
@@ -17,7 +15,7 @@ class TeamSelect{
     // Enter team name
     textSize(36);
     fill(color(255, 255, 0));
-    textAlign(CENTER);
+    //textAlign(CENTER);
     text("Enter team name", width/2 , height/10);
     text(teamName, width/2 , height/10*1.5);
   
@@ -48,31 +46,26 @@ class TeamSelect{
     fill(color(255,128,0));
     rect(width/2 - 100, height/10 * 8, 200,50);
     fill(color(0,0,0));
-    textAlign(CENTER);
-    text("Add team",width/2 - 100 + 100, height/10 * 8 + 35);
+    text("Add team", width/2 - 100 + 100, height/10 * 8 + 25);
     
     // Continue button
     fill(color(128,255,0));
     rect(width/2 - 100, height/10 * 8.75, 200,50);
     fill(color(0,0,0));
-    textAlign(CENTER);
-    text("Continue",width/2 - 100 + 100, height/10 * 8.75 + 35);
+    text("Continue",width/2 - 100 + 100, height/10 * 8.75 + 25);
     
     // No teams
     fill(color(255,0,0));
     rect(width/2 - 100, height/10 * 9.5, 200,50);
     fill(color(0,0,0));
-    textAlign(CENTER);
-    text("No teams",width/2 - 100 + 100, height/10 * 9.5 + 35);
+    text("No teams",width/2 - 100 + 100, height/10 * 9.5 + 25);
     
     if (locked){
       colorName();
     }
   }
   
-
-  
-  void keyPress(char key){
+  void keyPressed(){
     if (key == BACKSPACE){
       if (teamName.length() > 0){
         teamName = "";
@@ -85,12 +78,12 @@ class TeamSelect{
     } 
   }
   
-  void release(PVector click, boolean left){
+  void mouseReleased(){
     locked = false;
     currentColor = "";
   }
   
-  void click(PVector click, boolean left){
+  void click(){
     if (mouseY > sliderY && mouseY < sliderY + sliderHeight){
       if (mouseX > width/2 - 200 - 20 && mouseX < width/2 - 200 - 20 + 40){
         locked = true;

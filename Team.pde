@@ -50,7 +50,7 @@ void draw(){
     fill(color(0,0,255));
   }
   
-  textAlign(CENTER);
+  //textAlign(CENTER);
   text(title + ": " + score, pos.x + size.x / 2, pos.y + size.y / 2);
 }
 
