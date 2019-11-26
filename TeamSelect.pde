@@ -52,7 +52,7 @@ class TeamSelect{
     fill(color(128,255,0));
     rect(width/2 - 100, height/10 * 8.75, 200,50);
     fill(color(0,0,0));
-    text("Continue",width/2 - 100 + 100, height/10 * 8.75 + 25);
+    text("Start Game",width/2 - 100 + 100, height/10 * 8.75 + 25);
     
     // No teams
     fill(color(255,0,0));
@@ -96,7 +96,9 @@ class TeamSelect{
         currentColor = "blue";
       } //    rect(width/2 - 100, height/10 * 8, 200,50);
     } else if (mouseX > width/2 - 100 && mouseX < width / 2 + 100 && mouseY > height/10 * 8 && mouseY < height/10 * 8 + 50){ // Add team button
-    
+      if ( teamName == "" ) {
+        return;
+      }
       boolean blueText = false;
       if (r > 180 && g > 180){
         blueText = true;
@@ -106,9 +108,12 @@ class TeamSelect{
       r = 0;
       g = 0;
       b = 0;
-    } else if (mouseX > width/2 - 100 && mouseX < width / 2 + 100 && mouseY > height/10 * 8.75 && mouseY < height/10 * 8.75 + 50){ // Continue button
-      TC.fixTeamSizes();
+    } else if (mouseX > width/2 - 100 && mouseX < width / 2 + 100 && mouseY > height/10 * 8.75 && mouseY < height/10 * 8.75 + 50){ // Start Game Button
+      if ( TC.teams.size() < 2 ) {
+        return;
+      }
       
+      TC.fixTeamSizes(); 
       state++;
     } else if(mouseX > width/2 - 100 && mouseX < width / 2 + 100 && mouseY > height/10 * 9.5 && mouseY < height/10 * 9.5 + 50){ //Skip
       quiz.setSize(new PVector(width,height));
