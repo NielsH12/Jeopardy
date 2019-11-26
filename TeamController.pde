@@ -46,8 +46,12 @@ class TeamController {
         if(teams.get(i).score > highScore){
           highScore = teams.get(i).score;
           winner = teams.get(i).title;
-        } else if(teams.get(i).score == highScore){
-          winner = winner + " & " + teams.get(i).title;  
+        } else if(teams.get(i).score == highScore){          
+          if ( winner == "" ) {
+            winner = teams.get(i).title;  
+          } else {
+            winner = winner + " & " + teams.get(i).title;  
+          }
         }; 
       } 
     } else {
