@@ -24,7 +24,7 @@ class Intro{
     fill(color(255, 255, 0, map(introCounter, introCounterBackup - 10, 10, 0, 255)));
     textSize(18);
     //textAlign(CENTER);
-    text("By Niels Hvid", width/2, height/2 + 25);
+    text("By Niels Hvid", width/2, height/2 + 35);
     
     if (credit){
       fill(color(255, 255, 0, map(introCounter, introCounterBackup - 60, 60, 0, 255)));
