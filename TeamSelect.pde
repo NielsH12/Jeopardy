@@ -114,11 +114,11 @@ class TeamSelect{
       }
       
       TC.fixTeamSizes(); 
-      state++;
+      state = state.nextState();
     } else if(mouseX > width/2 - 100 && mouseX < width / 2 + 100 && mouseY > height/10 * 9.5 && mouseY < height/10 * 9.5 + 50){ //Skip
       quiz.setSize(new PVector(width,height));
       noTeam = true;
-      state++;
+      state = state.nextState();
     }
       
 
