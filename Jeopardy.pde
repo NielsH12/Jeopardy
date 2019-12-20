@@ -32,7 +32,7 @@ Quiz quiz;
 Winner winner;
 
 Error error;
-
+LightInterface linterface;
 
 JeopardyState state = JeopardyState.INTRO; 
 
@@ -45,7 +45,8 @@ void setup(){
   surface.setTitle("Music Jeopardy");
   
   error = new Error();
-
+  linterface = new LightInterface(this);
+  linterface.start();
   minim = new Minim(this);
   File introSong = new File(sketchPath() + "/data/DefaultMusic/intro_song.mp3");
   if (introSong.exists()) {
