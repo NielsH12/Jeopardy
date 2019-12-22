@@ -36,7 +36,7 @@ class Intro{
     introCounter--;
     
     if (introCounter <= 0){
-      state++;
+      state = state.nextState();
     } 
   }
   
@@ -45,7 +45,7 @@ class Intro{
 
   
   void click(){
-    if (state == 0){
+    if (state == Jeopardy.JeopardyState.INTRO){
       if (mouseButton == RIGHT){
         introCounter = 0;
       }

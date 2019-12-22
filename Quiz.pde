@@ -13,14 +13,14 @@ class Quiz{
   void keyPress(char key){
     if (key == 'q'){
       TC.findWinningTeam();
-      state = 3;
+      state = Jeopardy.JeopardyState.WINNING_SCREEN;
     }
   }
   
   void keyPressed(){
     if (key == 'q'){
       TC.findWinningTeam();
-      state = 3;
+      state = Jeopardy.JeopardyState.WINNING_SCREEN;
     }
   }
   

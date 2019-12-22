@@ -13,7 +13,7 @@ class Error{
   }
   
   void setError(String message){
-    state = 4;
+    state = Jeopardy.JeopardyState.ERROR_SCREEN;
     error = message;
   }
   
