@@ -11,7 +11,9 @@ enum LightInterfaceMessage {
     OTA_DATA(9),
     PING(10),
     PULSE_SETTINGS(11),
-    ONBOARD_LED_STRENGTH(12);
+    ONBOARD_LED_STRENGTH(12),
+    RUNNING_SECTIONS(14),
+    RAINBOW(15);
 
   private final int value;
 
