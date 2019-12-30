@@ -11,8 +11,10 @@ public class LightInterface extends Thread {
     LightMode mode = LightMode.OFF;
     PulseSettings pulseSettings;
     GlitterSettings glitterSettings;
+    RunningSectionSettings runningSectionSettings;
+    RainbowSettings rainbowSettings;
     float aliveLedStrength = 0;
-    float lightStrength    = 1;
+    float lightStrength    = 0.3;
     LightDeviceDiscover deviceDiscoverer;
     Instant lastContact;
     LightInterface(PApplet parent) {
@@ -20,8 +22,10 @@ public class LightInterface extends Thread {
         this.lock             = new ReentrantLock();
         this.LEDColor         = new ColorSettings((byte)0, (byte)0, (byte)0);
         this.strobeSettings   = new StrobeLightSettings(0, 0);
-        this.pulseSettings    = new PulseSettings(0, PulseDirection.IN, true);
+        this.pulseSettings    = new PulseSettings(0, PulseDirection.IN, false);
         this.glitterSettings  = new GlitterSettings(0, false, 0);
+        this.runningSectionSettings = new RunningSectionSettings(10, 5, 2);
+        this.rainbowSettings  = new RainbowSettings(10);
         this.deviceDiscoverer = new LightDeviceDiscover();
         this.lastContact = Instant.now();
     }
@@ -43,6 +47,8 @@ public class LightInterface extends Thread {
           this.sendMessage(this.pulseSettings.getMessage());
           this.sendMessage(this.strobeSettings.getMessage());
           this.sendMessage(this.glitterSettings.getMessage());
+          this.sendMessage(this.runningSectionSettings.getMessage());
+          this.sendMessage(this.rainbowSettings.getMessage());
           delay(50);
         } 
     }
@@ -80,6 +86,16 @@ public class LightInterface extends Thread {
     public void setGlitterSettings(GlitterSettings settings)
     {
       this.glitterSettings = settings;
+    }
+    
+    public void setRainbowSettings(RainbowSettings settings)
+    {
+      this.rainbowSettings = settings;
+    }
+    
+    public void setRunningSectionsSettings(RunningSectionSettings settings)
+    {
+      this.runningSectionSettings = settings;
     }
       
     private byte[] getModeMessage()
@@ -128,6 +144,7 @@ public class LightInterface extends Thread {
         else
         {
           System.out.println("No light device discovered");
+          this.lastContact = Instant.now();
         }
       } catch(Exception e) {
         System.out.println("Connection failed");

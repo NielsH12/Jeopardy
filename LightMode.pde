@@ -7,7 +7,9 @@ enum LightMode {
   TETRIS(5),
   GAME_OF_LIFE(6),
   RUNNING_RING(7),
-  PULSE(8);
+  PULSE(8),
+  RUNNING_SECTIONS(9),
+  RAINBOW(10);
 
   private final int value;
 
