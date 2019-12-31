@@ -10,13 +10,13 @@ class Team{
     blueText = _blue;
   }
   
-void click(PVector click, boolean left){
-  if (left){
-    if(click.x > pos.x && click.x < pos.x+size.x && click.y > pos.y && click.y < pos.y+size.y ){
+void click(){
+  if (mouseButton == LEFT){
+    if(mouseX > pos.x && mouseX < pos.x+size.x && mouseY > pos.y && mouseY < pos.y+size.y ){
       scoreToAdd += quiz.getPoints(c, true);
     }
   } else {
-    if(click.x > pos.x && click.x < pos.x+size.x && click.y > pos.y && click.y < pos.y+size.y ){
+    if(mouseX > pos.x && mouseX < pos.x+size.x && mouseY > pos.y && mouseY < pos.y+size.y ){
       //score -= quiz.getPoints(c, false);
       scoreToAdd -= quiz.getPoints(c, false);
     }
@@ -42,9 +42,9 @@ void draw(){
     rect(pos.x, pos.y, size.x, size.y);    
   }
 
-  textFont(createFont("Arial Bold", 46));
+  textFont(createFont("Arial Bold", 36));
   fill(color(255,255,0));
-  textSize(46);
+  textSize(36);
   
   if(blueText){
     fill(color(0,0,255));

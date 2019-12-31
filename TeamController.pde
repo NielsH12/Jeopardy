@@ -20,17 +20,17 @@ class TeamController {
     return teams.get(i); 
   }
   
-  void click(PVector click, boolean left){
+  void click(){
     for (int i = 0; i < teams.size(); i++){
-      teams.get(i).click(click, left); 
+      teams.get(i).click(); 
     }
     winner = findWinningTeam();
   }
   
   void fixTeamSizes(){
     for (int i = 0; i < teams.size(); i++){     
-      teams.get(i).setSize(new PVector(width / teams.size(), height/7));
-      teams.get(i).setPos(new PVector((width / teams.size()) * i, height / 7 * 6));
+      teams.get(i).setSize(new PVector(width / teams.size(), height/9));
+      teams.get(i).setPos(new PVector((width / teams.size()) * i, height / 9 * 8));
     }
   }
   

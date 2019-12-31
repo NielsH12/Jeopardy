@@ -10,13 +10,6 @@ class Quiz{
     }
   }
   
-  void keyPress(char key){
-    if (key == 'q'){
-      TC.findWinningTeam();
-      state = Jeopardy.JeopardyState.WINNING_SCREEN;
-    }
-  }
-  
   void keyPressed(){
     if (key == 'q'){
       TC.findWinningTeam();
@@ -24,7 +17,20 @@ class Quiz{
     }
   }
   
-  void click(PVector click, boolean left){
+  void click(){
+    // Check that click was within Quiz window
+    if(mouseX > pos.x && mouseX < pos.x + size.x && mouseY > pos.y && mouseY < pos.y + size.y){ 
+      
+      // Find which category was clicked
+      int t = (int)Math.floor((mouseX - pos.x) / (size.x / categories.size())); 
+
+      
+      // Call click function on clicked category
+      currentlyPlaying = categories.get(t).click(); 
+    }
+  }
+  /*
+  void click(){
     // Check that click was within Quiz window
     if(mouseX > pos.x && mouseX < pos.x + size.x && mouseY > pos.y && mouseY < pos.y + size.y){ 
       
@@ -35,10 +41,10 @@ class Quiz{
       currentlyPlaying = categories.get(t).click(); 
     }
   }
-  
+  */
   public int getPoints(color _c, boolean correct){
     if (currentlyPlaying == null) return 0;
-    if (currentlyPlaying.state != 3) return 0;
+    if (currentlyPlaying.internalState != 3) return 0;
     
     if (correct){
       currentlyPlaying.setWinningColor(_c);
@@ -47,6 +53,8 @@ class Quiz{
   }
   
   public void setSize(PVector _size){
+    println("setSize called");
+    println(_size);
     size = _size;
     for (int i = 0; i < categories.size(); i++){
       categories.get(i).setSize(new PVector(size.x / categories.size(), size.y));
@@ -57,7 +65,10 @@ class Quiz{
   void load(String path){
     String[] categoryNames = listFileNames(sketchPath() + "/data/" + path);  
     for (int i = 0; i < categoryNames.length; i++){
-      categories.add(new Category( new PVector(size.x / categoryNames.length * i, pos.y), new PVector(size.x / categoryNames.length, size.y), categoryNames[i]));
+      categories.add(new Category( 
+      new PVector(pos.x + i * size.x / categoryNames.length, pos.y),
+      new PVector(size.x / categoryNames.length, size.y),
+      categoryNames[i]));
     }
   }
   

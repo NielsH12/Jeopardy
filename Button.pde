@@ -13,13 +13,13 @@ class Button{
     
     song = _song;
     answer = _answer;
-    state = 0;
+    internalState = 0;
     
     title = _title;
   }
   
   int getState(){
-    return state;
+    return internalState;
   }
   
   void draw(){
@@ -30,18 +30,18 @@ class Button{
     rect(pos.x, pos.y, size.x, size.y);
     // Text
     if (title){
-      textFont(createFont("Arial Bold", 46));
+      textFont(createFont("Arial Bold", 36));
     } else {
-      textFont(createFont("Arial", 46));
+      textFont(createFont("Arial", 36));
     }
     
     fill(color(255,255,0));
-    textSize(46);
+    textSize(36);
     
     if (title){
       text(value, pos.x + size.x / 2, pos.y + size.y / 2);
     } else {
-      if (state != 4)
+      if (internalState != 4)
       text("$" + value, pos.x + size.x / 2, pos.y + size.y / 2);
     }
   }
@@ -49,18 +49,26 @@ class Button{
   void click(){
     if (title) return;
     
-    switch (state) {
+    if (minigame) {
+      c = c3;
+      callMinigame(); 
+      internalState = 3;
+      minigame = false;
+      return; 
+    }
+    
+    switch (internalState) {
       case 0:  // Button is passive
         if (mouseButton==LEFT){
           player.pause();
           player = minim.loadFile(song,2048);
           player.play();
           c = c1;
-          state = 1;
+          internalState = 1;
         } else {
           c = c4;
           value = " ";
-          state = 4;
+          internalState = 4;
         }
         break;
       
@@ -68,11 +76,11 @@ class Button{
         if (mouseButton==LEFT){
           player.pause();
           c = c2;
-          state = 2;
+          internalState = 2;
         } else {
           player.pause();
           c = c0;
-          state = 0;
+          internalState = 0;
         }
         break;
           
@@ -81,11 +89,11 @@ class Button{
           player = minim.loadFile(answer, 2048);
           player.play();
           c = c3;
-          state = 3;
+          internalState = 3;
         } else {
           player.play();
           c = c1;
-          state = 1;  
+          internalState = 1;  
         }      
         break;
       
@@ -94,12 +102,12 @@ class Button{
           player.pause();
           value = " ";
           c = c4;
-          state = 4;
+          internalState = 4;
         } else {
           value = backupValue;
           player.pause();
           c = c1;
-          state = 1;   
+          internalState = 1;   
         }
         break;
         
@@ -111,7 +119,7 @@ class Button{
           player.pause();
           c = c0;
           c4 = color(100, 100, 100);
-          state = 0;
+          internalState = 0;
         }
         break;
         
@@ -119,6 +127,20 @@ class Button{
         error.setError("Unexpected button state");
         break;
     }
+  }
+  
+  void setMinigame(JeopardyState _gameType){
+    println("minigame set");
+    minigame=true;
+    gameType = _gameType;
+  }
+  
+  void callMinigame() {
+    state = gameType;
+    println("starting minigame");  
+    // Start the minigame from this function
+    
+    
   }
   
   void setPosition( PVector _pos){
@@ -150,6 +172,9 @@ class Button{
     song = _song; 
   }
   
+  boolean minigame = false;
+  JeopardyState gameType; // state of the minigame
+  
   boolean title; // If title, use bold font
   
   PVector pos;
@@ -166,7 +191,7 @@ class Button{
   String value;
   String backupValue;
   
-  int state;
+  int internalState;
   
   String song;
   String answer;
